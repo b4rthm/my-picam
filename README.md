@@ -37,5 +37,6 @@ Add this line:
 
 1. /
 2. /info
-3. /timelapse?fps=3
+3. /refresh
+4. /timelapse?fps=3
    
