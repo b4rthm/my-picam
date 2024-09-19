@@ -1,6 +1,6 @@
 import os
 
-PORT = 5000
+PORT = 80
 RESOLUTION = 'max'
 SLEEP_TIME = 3600
 
