@@ -1,6 +1,12 @@
 #!/bin/bash
-FILE="/home/pi/temperature.log"
-rm $FILE
+DIR="/home/pi/my-picam/logs"
+FILE="$DIR/temp.log"
+if [ ! -d "$DIR" ]; then
+    mkdir -p "$DIR"
+fi
+if [ -f "$FILE" ]; then
+    rm "$FILE"
+fi
 max_temp=0
 while true
 do

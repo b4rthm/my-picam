@@ -6,8 +6,27 @@ from PIL import Image
 from picamera import PiCamera
 from datetime import datetime
 import numpy as np
+from config import *
 
-log_path = '/home/pi/makeFotoAndServeLatest.log'
+def createFolders():
+    createFolder(LOG_DIR)
+    createFolder(IMAGE_DIR)
+    createFolder(TMP_DIR)
+
+def createFolder(folder_path):
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+def myprint(*ts):
+    global LOG_PATH
+    date = str(datetime.today())
+    text = ''
+    for t in ts:
+        text += str(t) + ' '
+    date_prefix = '{}: \t'.format(date)
+    with open(LOG_PATH, 'at') as log_file:
+        log_file.write(date_prefix + text+ '\n')
+    print(*ts)
 
 def getCamera(resolution):
     camera = PiCamera()
@@ -27,22 +46,10 @@ def getCamera(resolution):
 def takeImage(camera):
     myprint('Making image')
     date = str(datetime.today())
-    currentFilePath = '/home/pi/fotos/snapshot_' + date + '.jpg'
-    latestFilePath = '/home/pi/latest.jpg'
-    camera.capture(currentFilePath)
-    deleteFile(latestFilePath)
-    shutil.copy(currentFilePath, latestFilePath)
-
-def myprint(*ts, new_line=False):
-    global log_path
-    date = str(datetime.today())
-    text = ''
-    for t in ts:
-        text += str(t) + ' '
-    date_prefix = '{}: \t'.format(date)
-    with open(log_path, 'at') as log_file:
-        log_file.write(date_prefix + text+ '\n')
-    print(*ts)
+    CURRENT_PATH = f'{IMAGE_DIR}/snapshot_{date}.jpg'
+    camera.capture(CURRENT_PATH)
+    deleteFile(LATEST_PATH)
+    shutil.copy(CURRENT_PATH, LATEST_PATH)
 
 def read_last_line(file_path):
     with open(file_path, 'rb') as file:
@@ -66,19 +73,15 @@ def count_files_in_folder(folder_path):
     return len(files)
 
 def getInfo():
-    file_path = '/home/pi/temperature.log'
-    last_line = read_last_line(file_path)
+    last_line = read_last_line(TEMP_LOG_PATH)
     temp, max_temp = extract_temps(last_line)
-    folder_path = '/home/pi/fotos/'
-    count = count_files_in_folder(folder_path) - 1 # minus latest
+    count = count_files_in_folder(IMAGE_DIR) - 1 # minus latest
     info = f'Temp: {temp}°C, Max Temp: {max_temp}°C, Foto Count: {count}'
     return info
 
-def deleteFile(path):
-    try:
-        os.remove(video_path)
-    except:
-        pass
+def deleteFile(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
 
 def makeVideo(image_dir, video_path, fps):
     deleteFile(video_path)

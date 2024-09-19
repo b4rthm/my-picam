@@ -1,11 +1,12 @@
 from time import sleep
 from utils import *
+from config import RESOLUTION, SLEEP_TIME
 
-SLEEP_TIME = 3600
+createFolders()
 
 try:
     while True:
-        camera = getCamera('max')
+        camera = getCamera(RESOLUTION)
         takeImage(camera)
         camera.close()
         sleep(SLEEP_TIME)
