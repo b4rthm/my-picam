@@ -35,7 +35,7 @@ def refresh():
     camera.close()
     return sendFile()
 
-@app.route('/myvideo')
+@app.route('/timelapse')
 def myvideo():
     FPS = request.args.get('fps', default=3, type=int)
     makeVideo(IMAGE_DIR, VIDEO_PATH, FPS)

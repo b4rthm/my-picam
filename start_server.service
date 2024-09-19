@@ -1,0 +1,13 @@
+[Unit]
+Description=Starting PiCam Server systemd service.
+After=network.target
+
+[Service]
+User=root
+Type=simple
+Restart=always
+Environment=PYTHONPATH=/home/pi/.local/lib/python3.7/site-packages
+ExecStart=/usr/bin/python3.7 /home/pi/my-picam/server.py
+
+[Install]
+WantedBy=multi-user.target
