@@ -24,10 +24,10 @@ Add this line:
 
 ## useful aliases 
 
-    alias enableServices="sudo systemctl enable start_serveLatest.service && sudo systemctl enable start_makeFoto.service"
-    alias disableServices="sudo systemctl disable start_serveLatest.service && sudo systemctl disable start_makeFoto.service"
-    alias startServices="sudo systemctl start start_serveLatest.service && sudo systemctl start start_makeFoto.service"
-    alias stopServices="sudo systemctl stop start_serveLatest.service && sudo systemctl stop start_makeFoto.service"
+    alias enableServices="sudo systemctl enable start_server.service && sudo systemctl enable start_makeFoto.service"
+    alias disableServices="sudo systemctl disable start_server.service && sudo systemctl disable start_makeFoto.service"
+    alias startServices="sudo systemctl start start_server.service && sudo systemctl start start_makeFoto.service"
+    alias stopServices="sudo systemctl stop start_server.service && sudo systemctl stop start_makeFoto.service"
 
 ## check ip
 
