@@ -1,6 +1,6 @@
 # my-picam
 
-## create systemd services and reload
+## create systemd services (or copy mine) and reload
 
     sudo nano /etc/systemd/system/start_server.service
     sudo nano /etc/systemd/system/start_makeFoto.service
