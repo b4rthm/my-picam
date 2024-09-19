@@ -1,1 +1,41 @@
 # my-picam
+
+## create systemd services and reload
+
+    sudo nano /etc/systemd/system/start_server.service
+    sudo nano /etc/systemd/system/start_makeFoto.service
+
+    sudo systemctl enable start_server.service
+    sudo systemctl enable start_makeFoto.service
+    sudo systemctl start start_server.service
+    sudo systemctl start start_makeFoto.service
+
+    sudo systemctl daemon-reload
+
+## startup for temp logger
+
+    chmod +x /home/pi/my-picam/temp-logger.sh 
+
+    sudo nano /etc/rc.local
+
+Add this line: 
+    
+    sudo /home/pi/my-picam/temp-logger.sh &
+
+## useful aliases 
+
+    alias enableServices="sudo systemctl enable start_serveLatest.service && sudo systemctl enable start_makeFoto.service"
+    alias disableServices="sudo systemctl disable start_serveLatest.service && sudo systemctl disable start_makeFoto.service"
+    alias startServices="sudo systemctl start start_serveLatest.service && sudo systemctl start start_makeFoto.service"
+    alias stopServices="sudo systemctl stop start_serveLatest.service && sudo systemctl stop start_makeFoto.service"
+
+## check ip
+
+    hostname -I
+
+## routes
+
+1. /
+2. /info
+3. /timelapse?fps=3
+   
