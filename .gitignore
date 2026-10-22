@@ -2,3 +2,5 @@ __pycache__/
 images/
 tmp/
 logs/
+*.pyc
+.venv/

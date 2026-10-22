@@ -1,5 +1,5 @@
 [Unit]
-Description=Starting PiCam Server systemd service.
+Description=Starting PiCam capture daemon systemd service.
 After=network.target
 
 [Service]
@@ -9,6 +9,8 @@ Restart=always
 RestartSec=10
 StartLimitBurst=5
 Environment=PYTHONPATH=/home/pi/.local/lib/python3.7/site-packages
+WorkingDirectory=/home/pi/my-picam
+ExecStartPre=/usr/bin/python3.7 -c "import sys; sys.path.insert(0, '/home/pi/my-picam'); import config, utils; utils.createFolders()"
 ExecStart=/usr/bin/python3.7 /home/pi/my-picam/makeFoto.py
 
 [Install]
